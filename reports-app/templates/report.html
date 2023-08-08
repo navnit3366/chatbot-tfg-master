@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+{% block title %}Informe PHQ9{% endblock %}
+{% block css_includes %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}"/>
+{% endblock %}
+{% block content %}
+{% if did_finish %}
+    <h2><span class="badge badge-success float-left">Finalizado</span></h2>
+    <div class="row align-items-center justify-content-end mr-1">
+        <h4>Fecha de inicio <span class="badge badge-secondary">{{ start_date }}</span></h4>
+    </div>
+    <div class="row align-items-center justify-content-end mr-1">
+         <h4>Fecha de finalización <span class="badge badge-secondary">{{ end_date }}</span></h4>
+    </div>
+{% else %}
+    <h2><span class="badge badge-danger float-left">Abandonado</span></h2>
+    <div class="row align-items-center justify-content-end mr-1">
+        <h4>Fecha de inicio <span class="badge badge-secondary">{{ start_date }}</span></h4>
+    </div>
+{% endif %}
+<hr>
+<h2>Puntuación del cuestionario</h2>
+<div class="table-responsive">
+    <table class="table" id="questions-table">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">Nº de pregunta</th>
+                <th scope="col">Respuesta del usuario</th>
+                <th scope="col">Puntuación otorgada</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for i, answer, score in questions %}
+                <tr>
+                    <th scope="row">{{ i }}</th>
+                    <td>{{ answer['text'] }}</td>
+                    {% if loop.previtem %}
+                        <td>{{ score['value'] - loop.previtem[2]['value'] }}</td>
+                    {% else %}
+                        <td>{{ score['value'] }}</td>
+                    {% endif %}
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+<div class="row justify-content-center">
+    <h1><span class="badge badge-secondary">Puntuación total: {{ final_score }}</span></h1>
+</div>
+<br>
+<h2>Solicitudes de reformulación de pregunta</h2>
+<div class="table-responsive">
+    <table class="table" id="rephrase-table">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">Nº de pregunta</th>
+                <th scope="col">Frase del usuario</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for i, data in rephrases %}
+                <tr>
+                    <th scope="row">{{ i }}</th>
+                    <td>{{ data['text'] }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+<br>
+<h2>Respuestas no entendidas por el bot</h2>
+<div class="table-responsive">
+    <table class="table" id="misunderstand-table">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">Nº de pregunta</th>
+                <th scope="col">Frase del usuario</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for i, text in misunderstanding %}
+                <tr>
+                    <th scope="row">{{ i }}</th>
+                    <td>{{ text }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
+{% block footer %}{% endblock %}
+{% block js_includes %}
+<script type="text/javascript" src="{{ url_for('static', filename='js/tables.js') }}"></script>
+{% endblock %}

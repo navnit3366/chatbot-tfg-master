@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block title %}Informes PHQ9{% endblock %}
+{% block css_includes %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}"/>
+{% endblock %}
+{% block content %}
+<div class="table-responsive">
+    <table class="table" id="table">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">ID</th>
+                <th scope="col">Fecha</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for key in data %}
+                <tr>
+                    <th scope="row">{{ key['id'] }}</th>
+                    <td>{{ key['sender_id'] }}</td>
+                    <td>{{ key['date'] }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
+{% block footer %}{% endblock %}
+{% block js_includes %}
+<script type="text/javascript" src="{{ url_for('static', filename='js/tables.js') }}"></script>
+{% endblock %}

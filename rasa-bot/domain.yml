@@ -1,0 +1,55 @@
+intents:
+  - start
+  - affirm
+  - deny
+  - answer_question
+  - rephrase
+
+entities:
+  - frequency
+
+actions:
+  - action_ask_question
+  - action_start_questions
+  - action_end_conversation
+  - action_fallback_management
+  - action_update_score
+  - action_rephrase_sentence
+  - action_give_feedback
+
+slots:
+   question_id:
+      type: unfeaturized
+      initial_value: 0
+   fallback_count:
+      type: unfeaturized
+      initial_value: 0
+   score_questions:
+      type: unfeaturized
+      initial_value: 0
+   frequency:
+      type: categorical
+      values:
+      - low
+      - low-medium
+      - medium
+      - medium-high
+      - high
+   state:
+      type: categorical
+      values:
+      - intro
+      - questions
+      initial_value: intro
+
+responses:
+  utter_introduction:
+    - text: "¡Hola! Soy P.E.P.A, un asistente virtual que contribuye al bienestar psicológico de las personas. Mi tarea es analizar tus respuestas y ayudar a los profesionales de la salud con el diagnóstico y el tratamiento de múltiples problemas de salud."
+  utter_ask_question_request:
+    - text: "¿Puedo realizarle unas pocas preguntas para realizar la evaluación?"
+  utter_fallback:
+    - text: "No te estoy entendiendo, ¿podrías decirmelo de manera más sencilla?"
+
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true

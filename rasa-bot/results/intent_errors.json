@@ -1,0 +1,42 @@
+[
+  {
+    "text": "adelante",
+    "intent": "affirm",
+    "intent_prediction": {
+      "name": "answer_question",
+      "confidence": 0.8818901777267456
+    }
+  },
+  {
+    "text": "por supuesto",
+    "intent": "affirm",
+    "intent_prediction": {
+      "name": "deny",
+      "confidence": 0.519601583480835
+    }
+  },
+  {
+    "text": "de ninguna manera",
+    "intent": "deny",
+    "intent_prediction": {
+      "name": "answer_question",
+      "confidence": 0.8945592641830444
+    }
+  },
+  {
+    "text": "me parece bien",
+    "intent": "affirm",
+    "intent_prediction": {
+      "name": "answer_question",
+      "confidence": 0.9997835159301758
+    }
+  },
+  {
+    "text": "no quiero",
+    "intent": "deny",
+    "intent_prediction": {
+      "name": "rephrase",
+      "confidence": 0.8934465050697327
+    }
+  }
+]
